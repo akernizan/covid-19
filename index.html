@@ -4,27 +4,64 @@
 <head>
   <meta charset="utf-8">
   <title>COVID-19</title>
-
-  <script
-    src="https://code.jquery.com/jquery-2.2.4.min.js"
-    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-    crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="./scripts/app.js"></script>
+  <link rel="stylesheet" type="text/css" href="./styles/style.css">
 </head>
 
 <body>
-  <div id="app">
-    <h1>Confirmed Cases: {{confirmed}}<h1>
-    <h2>Countries:</h2>
-    <p v-for="c of country">{{c.country}} : {{c.latest}}</p>
-  <div>
+  <div class="container">
+    <h1>Global COVID-19 Data<h1>
 
+    <div id="totals">
+      <div class="stats">
+        <ul>
+          <li class="total-stats">
+            <h3>Gloal Statistics</h3>
+            <p>Total Cases: {{ totalCases }} </p>
+            <p>Total Deaths: {{ totalDeaths }} </p>
+            <p>Total Recoveries: {{ totalRecovered }}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
 
+    <div id="app">
+          <div class="search-wrapper">
+            <input type="text" v-model="searchQuery" placeholder="Search" />
+          </div>
+          <ul>
+            <li v-for="data in resultQuery"
+                v-on:click="toggleDeatils(data)"
+                v-show="country === '' || data.country.includes(resultQuery)"
+                v-bind:class="[data.active > 1000 ? 'high' : 'low']">
+              <h3>{{ data.country }}</h3>
+              <div class="countryStats" v-show="data.showDetail">
+                <div class="total-today">
+                  <p>Total Cases: {{ new Intl.NumberFormat().format(data.cases) }}</p>
+                  <p>Cases Today: {{ new Intl.NumberFormat().format(data.todayCases) }}</p>
+                </div>
+                <div class="deaths">
+                  <span>Deaths</span>
+                  <p>Total Deaths: {{ new Intl.NumberFormat().format(data.deaths) }}</p>
+                  <p>Deaths Today: {{ new Intl.NumberFormat().format(data.todayDeaths) }}</p>
+                </div>
+                <div class="recovered">
+                  <span>Recoveries</span>
+                  <p>Recoverd Cases: {{ new Intl.NumberFormat().format(data.recovered) }}</p>
+                </div>
+                <div class="active-critical">
+                  <span>Active/Critical Cases</span>
+                  <p>Active Cases: {{ new Intl.NumberFormat().format(data.active) }}</p>
+                  <p>Critical Cases: {{ new Intl.NumberFormat().format(data.critical) }}</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div>
+          </div>
 
-
-
+          <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+          <script src="./scripts/app.js"></script>
 </body>
 
 </html>
