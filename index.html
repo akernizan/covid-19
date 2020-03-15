@@ -26,7 +26,7 @@
 
     <div id="app">
           <div class="search-wrapper">
-            <input @input="evt=>searchQuery=evt.target.value"  type="text" placeholder="Search" />
+            <input type="text" v-model="searchQuery" v-on:input="searchQuery = $event.target.value" placeholder="Search Country..." />
           </div>
           <ul>
             <li v-for="data in resultQuery"
