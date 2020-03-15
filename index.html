@@ -10,6 +10,7 @@
 <body>
   <div class="container">
     <h1>Global COVID-19 Data<h1>
+      <a href=" https://github.com/akernizan/covid-19" target="_blank">Link to repo</a>
         <div class="color-legend">
           <h5>Legend</h5>
           <div class="color-code">
@@ -32,7 +33,10 @@
 
         <div id="app">
           <div class="search-wrapper">
-            <input type="text" v-model="searchQuery" placeholder="Search Country..." />
+            <input type="text"
+                  :value='searchQuery'
+                  @input='e=>searchQuery=e.target.value'
+                  placeholder="Search Country..." />
           </div>
           <ul>
             <li v-for="data in resultQuery" v-on:click="toggleDeatils(data)" v-show="country === '' || data.country.includes(resultQuery)" v-bind:class="[data.active > 1000 ? 'high' : 'low']">
