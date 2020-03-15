@@ -27,7 +27,7 @@ const app = new Vue({
   data: {
     covid19DataList: [],
     country: '',
-    searchQuery: null,
+    searchQuery: '',
   },
   methods: {
     fetchData() {
