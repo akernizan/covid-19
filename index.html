@@ -10,29 +10,32 @@
 <body>
   <div class="container">
     <h1>Global COVID-19 Data<h1>
+        <div class="color-legend">
+          <h5>Legend</h5>
+          <div class="color-code">
+            <p><span>Red: </span> > 1000 active cases</p>
+            <p><span>Green: </span> < 1000 active cases</p>
+          </div>
+        </div>
+        <div id="totals">
+          <div class="stats">
+            <ul>
+              <li class="total-stats">
+                <h3>Gloal Statistics</h3>
+                <p>Total Cases: {{ totalCases }} </p>
+                <p>Total Deaths: {{ totalDeaths }} </p>
+                <p>Total Recoveries: {{ totalRecovered }}</p>
+              </li>
+            </ul>
+          </div>
+        </div>
 
-    <div id="totals">
-      <div class="stats">
-        <ul>
-          <li class="total-stats">
-            <h3>Gloal Statistics</h3>
-            <p>Total Cases: {{ totalCases }} </p>
-            <p>Total Deaths: {{ totalDeaths }} </p>
-            <p>Total Recoveries: {{ totalRecovered }}</p>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <div id="app">
+        <div id="app">
           <div class="search-wrapper">
-            <input type="text" v-bind:value="searchQuery" v-on:input="searchQuery = $event.target.value" placeholder="Search Country..." />
+            <input type="text" :value="searchQuery" @input="e => searchQuery = e.target.value" placeholder="Search Country..." />
           </div>
           <ul>
-            <li v-for="data in resultQuery"
-                v-on:click="toggleDeatils(data)"
-                v-show="country === '' || data.country.includes(resultQuery)"
-                v-bind:class="[data.active > 1000 ? 'high' : 'low']">
+            <li v-for="data in resultQuery" v-on:click="toggleDeatils(data)" v-show="country === '' || data.country.includes(resultQuery)" v-bind:class="[data.active > 1000 ? 'high' : 'low']">
               <h3>{{ data.country }}</h3>
               <div class="countryStats" v-show="data.showDetail">
                 <div class="total-today">

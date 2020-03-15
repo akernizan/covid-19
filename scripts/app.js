@@ -62,6 +62,7 @@ const app = new Vue({
     resultQuery() {
       if (this.searchQuery) {
         return this.covid19DataList.filter((item) => {
+          console.log(this.searchQuery)
           return this.searchQuery.toLowerCase().split(' ').every(v => item.country.toLowerCase().includes(v))
         })
       } else {
