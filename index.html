@@ -5,70 +5,81 @@
   <meta charset="utf-8">
   <title>COVID-19</title>
   <link rel="stylesheet" type="text/css" href="./styles/style.css">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-160767260-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-160767260-1');
+  </script>
 </head>
 
 <body>
   <div class="container">
     <h1>Global COVID-19 Data<h1>
-      <a href=" https://github.com/akernizan/covid-19" target="_blank">Link to repo</a>
+        <a href=" https://github.com/akernizan/covid-19" target="_blank">Link to repo</a>
         <div class="color-legend">
           <h5>Legend</h5>
           <div class="color-code">
             <p><span>Red: </span> > 1000 active cases</p>
-            <p><span>Green: </span> < 1000 active cases</p>
+            <p><span>Green: </span>
+              < 1000 active cases</p> </div> </div> <div id="totals">
+                <div class="stats">
+                  <ul>
+                    <li class="total-stats" v-on:click="toggleData()">
+                      <h3>Gloal Statistics</h3>
+                      <div v-show="showInfo">
+                        <p>Total Cases: {{ totalCases }} </p>
+                        <p>Total Deaths: {{ totalDeaths }} </p>
+                        <p>Total Recoveries: {{ totalRecovered }}</p>
+                      </div>
+
+                    </li>
+                  </ul>
+                </div>
           </div>
-        </div>
-        <div id="totals">
-          <div class="stats">
+
+          <div id="app">
+            <div class="search-wrapper">
+              <input type="text" :value='searchQuery' @input='e=>searchQuery=e.target.value' placeholder="Search Country..." />
+            </div>
             <ul>
-              <li class="total-stats">
-                <h3>Gloal Statistics</h3>
-                <p>Total Cases: {{ totalCases }} </p>
-                <p>Total Deaths: {{ totalDeaths }} </p>
-                <p>Total Recoveries: {{ totalRecovered }}</p>
+              <li v-for="data in resultQuery" v-on:click="toggleDeatils(data)" v-show="country === '' || data.country.includes(resultQuery)" v-bind:class="[data.active > 1000 ? 'high' : 'low']">
+                <h3>{{ data.country }}</h3>
+                <div class="countryStats" v-show="data.showDetail">
+                  <div class="total-today">
+                    <p>Total Cases: {{ new Intl.NumberFormat().format(data.cases) }}</p>
+                    <p>Cases Today: {{ new Intl.NumberFormat().format(data.todayCases) }}</p>
+                  </div>
+                  <div class="deaths">
+                    <span>Deaths</span>
+                    <p>Total Deaths: {{ new Intl.NumberFormat().format(data.deaths) }}</p>
+                    <p>Deaths Today: {{ new Intl.NumberFormat().format(data.todayDeaths) }}</p>
+                  </div>
+                  <div class="recovered">
+                    <span>Recoveries</span>
+                    <p>Recoverd Cases: {{ new Intl.NumberFormat().format(data.recovered) }}</p>
+                  </div>
+                  <div class="active-critical">
+                    <span>Active/Critical Cases</span>
+                    <p>Active Cases: {{ new Intl.NumberFormat().format(data.active) }}</p>
+                    <p>Critical Cases: {{ new Intl.NumberFormat().format(data.critical) }}</p>
+                  </div>
+                </div>
               </li>
             </ul>
-          </div>
-        </div>
+            <div>
+            </div>
 
-        <div id="app">
-          <div class="search-wrapper">
-            <input type="text"
-                  :value='searchQuery'
-                  @input='e=>searchQuery=e.target.value'
-                  placeholder="Search Country..." />
-          </div>
-          <ul>
-            <li v-for="data in resultQuery" v-on:click="toggleDeatils(data)" v-show="country === '' || data.country.includes(resultQuery)" v-bind:class="[data.active > 1000 ? 'high' : 'low']">
-              <h3>{{ data.country }}</h3>
-              <div class="countryStats" v-show="data.showDetail">
-                <div class="total-today">
-                  <p>Total Cases: {{ new Intl.NumberFormat().format(data.cases) }}</p>
-                  <p>Cases Today: {{ new Intl.NumberFormat().format(data.todayCases) }}</p>
-                </div>
-                <div class="deaths">
-                  <span>Deaths</span>
-                  <p>Total Deaths: {{ new Intl.NumberFormat().format(data.deaths) }}</p>
-                  <p>Deaths Today: {{ new Intl.NumberFormat().format(data.todayDeaths) }}</p>
-                </div>
-                <div class="recovered">
-                  <span>Recoveries</span>
-                  <p>Recoverd Cases: {{ new Intl.NumberFormat().format(data.recovered) }}</p>
-                </div>
-                <div class="active-critical">
-                  <span>Active/Critical Cases</span>
-                  <p>Active Cases: {{ new Intl.NumberFormat().format(data.active) }}</p>
-                  <p>Critical Cases: {{ new Intl.NumberFormat().format(data.critical) }}</p>
-                </div>
-              </div>
-            </li>
-          </ul>
-          <div>
-          </div>
+            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 
-          <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-          <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
-          <script src="./scripts/app.js"></script>
+            <script src="./scripts/app.js"></script>
 </body>
 
 </html>

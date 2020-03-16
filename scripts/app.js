@@ -7,6 +7,7 @@ const totals = new Vue({
     totalCases: "",
     totalDeaths: "",
     totalRecovered: "",
+    showInfo: true,
   },
   methods: {
     fetchData() {
@@ -15,7 +16,10 @@ const totals = new Vue({
         this.totalDeaths = new Intl.NumberFormat().format(response.data.deaths)
         this.totalRecovered = new Intl.NumberFormat().format(response.data.recovered)
       })
-    }
+    },
+    toggleData: function() {
+      this.showInfo = !this.showInfo
+    },
   },
 })
 
@@ -32,23 +36,26 @@ const app = new Vue({
   methods: {
     fetchData() {
       axios.get('https://coronavirus-19-api.herokuapp.com/countries').then(response => {
-        const data = response.data;
-        for (var d in data) {
-          if (!data[d].showDetail) {
-            data[d].showDetail = false;
+        if (response) {
+          const data = response.data;
+          for (var d in data) {
+            if (!data[d].showDetail) {
+              data[d].showDetail = false;
+            }
           }
-        }
-        data.sort(function(a, b) {
-          if (a.country < b.country) {
-            return -1;
-          }
-          if (a.country > b.country) {
-            return 1;
-          }
-          return 0;
-        })
+          data.sort(function(a, b) {
+            if (a.country < b.country) {
+              return -1;
+            }
+            if (a.country > b.country) {
+              return 1;
+            }
+            return 0;
+          })
 
-        this.covid19DataList = data;
+          this.covid19DataList = data;
+        }
+
       })
     },
     toggleDeatils: function(data) {
