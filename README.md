@@ -1,7 +1,5 @@
 # Coronavirus Global Data
-
-Visualization for live information on the spread of COVID-19.
-Built in Vue.js
+Visualization for the cases of COVID-19 by country. Built in Vue.js
 
 ![alt text](https://akernizan.github.io/covid-19/img/covid19-search.png)
 
