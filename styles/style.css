@@ -14,20 +14,6 @@ a:hover {
   color: purple;
 }
 
-#totals h3 {
-  display: block;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-#totals ul li {
-  /* font-size: 1.35rem; */
-}
-
-#totals ul li p{
-  font-size: 1.35rem;
-}
-
 .color-legend {
   max-width: 400px;
   border: #eaeaea solid 3px;
@@ -45,7 +31,7 @@ a:hover {
 }
 
 .color-code p {
-    font-size: 1.3rem;
+  font-size: 1.3rem;
 }
 
 .color-code :first-child span{
@@ -73,7 +59,6 @@ h3 {
 
 p {
   color: #333;
-  font-size: 1rem;
 }
 
 .more:after {
@@ -159,11 +144,32 @@ input {
   font-size: 1.25rem;
 }
 
+.countryStats p {
+  font-size: 1rem;
+}
 .total-today {
   display: flex;
 }
 
+.total-today p {
+  font-size: 1.3rem;
+  color: #e50000;
+}
+
 .total-today p + p {
   margin-left: 20px;
-  color: #555;
+}
+
+#totals h3 {
+  display: block;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#totals ul li {
+  font-size: 1.35rem;
+}
+
+#totals ul li p {
+  font-size: 1rem;
 }
