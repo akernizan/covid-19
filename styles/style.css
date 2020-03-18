@@ -25,20 +25,29 @@ a:hover {
   cursor: default;
 }
 
+.block {
+  height: 20px;
+  width: 0;
+  border: #eaeaea solid 1px;
+  border-left: #95effe solid 5px;
+  background: #fff;
+  display: inline-block;
+}
+
 .color-legend h5 {
   margin-top: 0px;
   margin-bottom: 10px;
 }
 
 .color-code p {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 
 .color-code :first-child span{
-  color: #FF5833;
+  border-left: #FF5833 solid 5px;
 }
 .color-code :last-child span {
-  color: #3FD314;
+  border-left: #3FD314 solid 5px;
 }
 
 .container {
