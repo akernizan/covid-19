@@ -173,3 +173,7 @@ input {
 #totals ul li p {
   font-size: 1.3rem;
 }
+
+.deaths p , .recovered p, .active-critical p {
+  color: #4c4c4c;
+}

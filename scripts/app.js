@@ -38,6 +38,7 @@ const app = new Vue({
       axios.get('https://coronavirus-19-api.herokuapp.com/countries').then(response => {
         if (response) {
           const data = response.data;
+          console.log(data)
           for (var d in data) {
             if (!data[d].showDetail) {
               data[d].showDetail = false;
@@ -69,7 +70,6 @@ const app = new Vue({
     resultQuery() {
       if (this.searchQuery) {
         return this.covid19DataList.filter((item) => {
-          console.log(this.searchQuery)
           return this.searchQuery.toLowerCase().split(' ').every(v => item.country.toLowerCase().includes(v))
         })
       } else {
